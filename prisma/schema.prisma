@@ -1,0 +1,40 @@
+// Prisma schema — REST API Portfolio
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(120)
+  email     String   @unique @db.VarChar(180)
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  posts Post[]
+
+  @@map("users")
+}
+
+model Post {
+  id        String   @id @default(uuid()) @db.Uuid
+  title     String   @db.VarChar(180)
+  content   String?
+  published Boolean  @default(false)
+  authorId  String   @map("author_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([published, createdAt(sort: Desc)])
+  @@index([authorId])
+  @@map("posts")
+}
