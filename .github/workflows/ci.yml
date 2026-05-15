@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Lint, build & integration tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: api_user
+          POSTGRES_PASSWORD: api_password
+          POSTGRES_DB: node_rest_blueprint_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U api_user -d node_rest_blueprint_test"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://api_user:api_password@localhost:5432/node_rest_blueprint_test?schema=public
+      JWT_SECRET: ci_test_secret_at_least_16_chars_long
+      JWT_EXPIRES_IN: 1h
+      BCRYPT_SALT_ROUNDS: 4
+      AUTH_RATE_LIMIT_WINDOW_MS: 900000
+      AUTH_RATE_LIMIT_MAX: 1000
+      CORS_ORIGIN: "*"
+      PORT: 3001
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Run database migrations
+        run: npx prisma migrate deploy
+
+      - name: Run integration tests
+        run: npm test
