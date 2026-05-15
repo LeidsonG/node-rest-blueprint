@@ -123,8 +123,9 @@ cp .env.test.example .env.test
 # 4. Suba o PostgreSQL
 docker compose up -d
 
-# 5. Rode as migrations
+# 5. Rode as migrations (banco de dev e de testes)
 npx prisma migrate dev --name init
+npm run migrate:test
 
 # 6. Suba a API em modo dev
 npm run dev
