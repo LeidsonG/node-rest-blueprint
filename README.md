@@ -1,12 +1,14 @@
 # Node REST Blueprint
 
-[![CI](https://github.com/leidsongoncalves/node-rest-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/leidsongoncalves/node-rest-blueprint/actions/workflows/ci.yml)
+[![CI](https://github.com/LeidsonG/node-rest-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/LeidsonG/node-rest-blueprint/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 
 Blueprint open source de **REST API** em Node.js, pronto para ser usado como base de projetos profissionais. Implementa autenticação JWT, CRUD de posts e gestão de usuário com as melhores práticas de segurança, validação e documentação automática.
 
-> Veja **[USAGE.md](USAGE.md)** para um guia passo a passo de uso da API (com exemplos `curl`).
+> 📘 Primeira vez mexendo com REST API? Comece pelo **[APRENDER.md](APRENDER.md)** — uma aula completa do zero, cobrindo conceitos, autenticação JWT e cada endpoint campo a campo.
+>
+> Já manja? Veja **[USAGE.md](USAGE.md)** para um guia direto de uso da API (com exemplos `curl`).
 
 ## Sumário
 
