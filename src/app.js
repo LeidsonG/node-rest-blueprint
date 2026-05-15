@@ -1,8 +1,10 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
 
 const env = require('./config/env');
+const swaggerSpec = require('./docs/swagger');
 const authRoutes = require('./modules/auth/auth.routes');
 const usersRoutes = require('./modules/users/users.routes');
 const postsRoutes = require('./modules/posts/posts.routes');
@@ -22,6 +24,12 @@ function buildApp() {
   app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
+
+  app.get('/api-docs.json', (req, res) => res.json(swaggerSpec));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    explorer: true,
+    customSiteTitle: 'API REST Portfolio — Docs',
+  }));
 
   app.use('/auth', authRoutes);
   app.use('/users', usersRoutes);
