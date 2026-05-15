@@ -1,19 +1,19 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: api_rest_portifolio_db
+    container_name: node_rest_blueprint_db
     restart: unless-stopped
     environment:
       POSTGRES_USER: api_user
       POSTGRES_PASSWORD: api_password
-      POSTGRES_DB: api_rest_portifolio
+      POSTGRES_DB: node_rest_blueprint
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U api_user -d api_rest_portifolio"]
+      test: ["CMD-SHELL", "pg_isready -U api_user -d node_rest_blueprint"]
       interval: 5s
       timeout: 5s
       retries: 10

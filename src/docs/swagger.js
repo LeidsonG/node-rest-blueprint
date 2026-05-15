@@ -5,10 +5,10 @@ const pkg = require('../../package.json');
 const definition = {
   openapi: '3.0.3',
   info: {
-    title: 'API REST Portfolio',
+    title: 'Node REST Blueprint',
     version: pkg.version,
     description:
-      'REST API de portfolio com autenticação JWT, posts e usuários. ' +
+      'Blueprint open source de REST API em Node.js + Express + Prisma com autenticação JWT, posts e usuários. ' +
       'Use o botão Authorize para enviar o token Bearer.',
     license: { name: 'MIT' },
     contact: {

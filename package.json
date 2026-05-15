@@ -1,7 +1,7 @@
 {
-  "name": "api-rest-portifolio",
+  "name": "node-rest-blueprint",
   "version": "0.1.0",
-  "description": "REST API em Node.js com Express, Prisma e PostgreSQL — projeto de portfolio open source",
+  "description": "Blueprint open source de REST API em Node.js com Express, Prisma, JWT, Zod, Swagger e testes de integração — pronto para usar como base de projetos profissionais.",
   "main": "src/server.js",
   "author": "Leidson F. Gonçalves <leidsonpc@gmail.com>",
   "license": "MIT",
